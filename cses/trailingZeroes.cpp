@@ -1,14 +1,17 @@
 #include<iostream>
 using namespace std;
 using ll = long long;
+
 int main(){
-    ll n,count=1;
-    ll mod=1000000007;
+    ll n;
     cin>>n;
     
-    for(ll i=1;i<=n;i++){
-        count=count*2%mod;
-    }
+    ll count=0;
+    while(n>=5){
+        n/=5;
+        count+=n;
+    } 
     cout<<count<<endl;
     return 0;
 }
+
