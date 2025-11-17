@@ -18,8 +18,26 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
-void main() {
-    // Your solution here
+string s;
+vector<string> perms;
+int charCount[26];
+
+void search() {
     
+    
+}
+
+int main(){
+    cin >> s;
+
+	for (char c : s) { 
+	    charCount[c - 'a']++; 
+    }
+
+    search();
+
+    cout << perms.size() << '\n';
+
+	for (const string &perm : perms) { cout << perm << '\n'; }
 }
 

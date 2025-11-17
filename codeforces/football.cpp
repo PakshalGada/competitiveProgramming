@@ -18,24 +18,17 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
-bool distinct(int y) {
-    string s = to_string(y);
-    set<char> st(s.begin(), s.end());
-    return st.size() == s.size();
-}
-
-
 int main() {
-    int y;
-    cin>>y;
-    
-    while (true) {
-        y++;
-        if (distinct(y)) {
-            cout << y;
-            break;
-        }
-    }
+    string s;
+    cin >> s;
+
+    if (s.find("0000000") != string::npos || s.find("1111111") != string::npos)
+        cout << "YES";
+    else
+        cout << "NO";
+
     return 0;
+
+    
 }
 

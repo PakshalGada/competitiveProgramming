@@ -18,24 +18,22 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
-bool distinct(int y) {
-    string s = to_string(y);
-    set<char> st(s.begin(), s.end());
-    return st.size() == s.size();
-}
-
-
 int main() {
-    int y;
-    cin>>y;
+    int n; cin>>n;
+    int x=0,y=0,z=0;
     
-    while (true) {
-        y++;
-        if (distinct(y)) {
-            cout << y;
-            break;
-        }
+    while(n--){
+        int a,b,c;
+        cin>>a>>b>>c;
+        x+=a;
+        y+=b;
+        z+=c;   
     }
-    return 0;
+    if (x==0 && y==0 && z==0){
+        cout<<"YES"<<endl;
+    }else{
+        cout<<"NO"<<endl;
+    }
+    
 }
 
