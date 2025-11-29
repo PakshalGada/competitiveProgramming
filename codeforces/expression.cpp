@@ -19,16 +19,19 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int luckyNumbers[] = {4,7,47,74,44,444,447,474,477,777,774,744};
-        int n, count =0; cin>>n;
-        for(int i =0;i<12;i++)
-        {
-            if(n%luckyNumbers[i] == 0) count++;
+    int a,b,c;cin>>a>>b>>c;
+    
+    int v1 = a + b + c;          
+    int v2 = a + b * c;          
+    int v3 = a * b + c;          
+    int v4 = a * b * c;        
+    int v5 = (a + b) * c;        
+    int v6 = a * (b + c);        
 
-        }
-        if(count>0) cout<<"YES"<<endl;
-        else cout<<"NO"<<endl;
-        return 0;
+    int ans = max({v1, v2, v3, v4, v5, v6});
+
+    cout << ans << endl;
+    return 0;
     
 }
 
