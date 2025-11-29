@@ -22,7 +22,7 @@ int main() {
     ll n;
     cin>>n;
     
-    ll total=n*(n-1)/2;
+    ll total=n*(n+1)/2;
     
     if(total%2!=0){
         cout<<"NO\n";
@@ -43,11 +43,11 @@ int main() {
         }
     }
 
-    cout << set1.size() << "\n";
+    cout << set1.size() << endl;
     for (auto x : set1) cout << x << " ";
     cout << "\n";
 
-    cout << set2.size() << "\n";
+    cout << set2.size() << endl;
     for (auto x : set2) cout << x << " ";
     cout << "\n";
 
