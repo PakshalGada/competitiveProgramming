@@ -22,22 +22,30 @@ string s;
 vector<string> perms;
 int charCount[26];
 
-void search() {
-    
-    
+void search(const string &curr = "") {
+
+	if (curr.size() == s.size()) {
+        perms.push_back(curr);
+		return;
+	}
+	for (int i = 0; i < 26; i++) {
+		if (charCount[i] > 0) {
+			charCount[i]--;
+			search(curr + (char)('a' + i));
+			charCount[i]++;
+		}
+	}
 }
 
 int main(){
     cin >> s;
 
-	for (char c : s) { 
-	    charCount[c - 'a']++; 
-    }
+	for (char c : s) { charCount[c - 'a']++; }
 
     search();
 
-    cout << perms.size() << '\n';
+    cout << perms.size() << endl;
 
-	for (const string &perm : perms) { cout << perm << '\n'; }
+	for (const string &perm : perms){cout<<perm<<endl; }
 }
 

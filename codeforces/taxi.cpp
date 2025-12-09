@@ -19,27 +19,26 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int s, n;
-    cin >> s >> n;
+    int n;cin>>n;
     
-    vector<pair<int, int>> dragons(n);
+    vector<int> cnt(5, 0);           
     for (int i = 0; i < n; i++) {
-        int x, y;
-        cin >> x >> y;
-        dragons[i] = {x, y};
+        int x;
+        cin >> x;
+        cnt[x]++;
     }
-    sort(dragons.begin(), dragons.end());
-    for (auto& dragon : dragons) {
-        int xi = dragon.first;
-        int yi = dragon.second;
-        if (s <= xi) {
-            cout << "NO\n";
-            return 0;
-        }
-        s += yi;
-    }
-    cout << "YES\n";
+    
+    int taxis = 0;
+    taxis += cnt[4];
+    taxis += cnt[3];
+    cnt[1] -= cnt[3];               
+    if (cnt[1] < 0) cnt[1] = 0;
+    taxis += (cnt[2] + 1) / 2;
+    taxis += (cnt[1] + 3) / 4;
+    
+    cout << taxis << endl;
     return 0;
+
     
 }
 
