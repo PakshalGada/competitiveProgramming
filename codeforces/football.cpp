@@ -19,16 +19,38 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    string s;
-    cin >> s;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    if (s.find("0000000") != string::npos || s.find("1111111") != string::npos)
-        cout << "YES";
-    else
-        cout << "NO";
+    int n;
+    cin >> n;
 
-    return 0;
-
+    string t1;
+    cin >> t1;
     
+    int t1score = 1; 
+    
+    string t2 = "";
+    int t2score = 0;
+
+    for (int i = 0; i < n - 1; ++i) {
+        string current;
+        cin >> current;
+
+        if (current == t1) {
+            t1score++;
+        } else {
+            t2score++;
+            if (t2.empty()) {
+                t2 = current;
+            }
+        }
+    }
+
+    if (t1score > t2score) {
+        cout << t1 << endl;
+    } else {
+        cout << t2 << endl;
+    }
 }
 
