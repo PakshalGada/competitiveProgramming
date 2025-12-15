@@ -19,20 +19,24 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int n;
-    cin >> n;
-    vector<pair<int, int>> v(n);
-    for (int i = 0; i < n; i++) {
-        cin >> v[i].first >> v[i].second;
+    int a, b;
+    cin >> a >> b;
+    
+    int hours = 0;
+    int burnt = 0;
+    
+    while (a > 0) {
+        hours += a;
+        burnt += a;
+        a = burnt / b;
+        burnt = burnt % b;
     }
-    sort(v.begin(), v.end());
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i].second > v[i + 1].second) {
-            cout << "Happy Alex" << endl;
-            return 0;
-        }
-    }
-    cout << "Poor Alex" << endl;
+    
+    cout << hours << endl;
+    
+    return 0;
+
+    
     
 }
 
