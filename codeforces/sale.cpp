@@ -19,11 +19,24 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int t;cin>>t;
-    while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+    int n, m; cin>>n>>m; 
+    
+    vector<int> a(n);
+    for(int i=0; i<n; i++){
+        cin>>a[i];
+    } 
+    
+    sort(a.begin(), a.end());
+
+    int ans = 0;
+    for (int i=0; i<m; i++) {
+        if (a[i] < 0){
+            ans += -a[i];
+        }else{
+            break;
+        }
     }
+
+    cout<<ans<<endl;  
 }
 

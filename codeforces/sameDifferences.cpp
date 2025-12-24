@@ -20,10 +20,19 @@ typedef pair<int, int> pii;
 
 int main() {
     int t;cin>>t;
+    
     while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
+        int n;cin>>n;
+        unordered_map<ll,ll> freq;
+        ll ans=0;
+        for(int i=0; i<n; i++){
+            ll a;cin>>a;
+            ll key=a-i;
+            ans+=freq[key];
+            freq[key]++;
+        }
         cout<<ans<<endl;
     }
+    
 }
 

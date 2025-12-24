@@ -18,12 +18,19 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
-int main() {
-    int t;cin>>t;
-    while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+void main() {
+    int n; cin>>n;
+
+    vector<int> a(n);
+    for (int i=0; i<n; i++) {
+        cin>>a[i];
     }
+
+    sort(a.begin(), a.end());
+
+    for (int i=0; i<n; i++) {
+        cout<<a[i]<<" ";
+    }
+    
 }
 

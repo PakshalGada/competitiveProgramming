@@ -19,11 +19,14 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int t;cin>>t;
-    while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
-    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int n, a, ab; cin>>n>>a>>b;
+    
+    int minPos=max(a+1, n-b);
+    int ans=n-minPos+1;
+    
+    cout<<ans<<endl;
+    
 }
-

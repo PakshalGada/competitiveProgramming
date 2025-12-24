@@ -18,12 +18,8 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
-int main() {
-    int t;cin>>t;
-    while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
-    }
+void main() {
+    // Your solution here
+    
 }
 

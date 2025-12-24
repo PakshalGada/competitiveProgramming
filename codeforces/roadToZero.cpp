@@ -20,10 +20,17 @@ typedef pair<int, int> pii;
 
 int main() {
     int t;cin>>t;
+    
     while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+        ll x,y; cin>>x>>y;
+        ll a,b; cin>>a>>b;
+        
+        ll small = min(x, y);
+        ll large = max(x, y);
+        
+        ll cost = small*min(2*a, b)+(large-small)*a;
+        cout<<cost<<endl;
     }
+    
 }
 

@@ -15,15 +15,20 @@ typedef pair<int, int> pii;
 #ifdef LOCAL
 #define debug(x) cerr << #x << " = " << (x) << endl
 #else
-#define debug(x)
+#define debug(x);
 #endif
-
+      
 int main() {
-    int t;cin>>t;
+    int t; cin>>t;
+    
     while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+        ll n;cin>>n;
+        if ((n & (n-1)) == 0){
+            cout<<"NO"<<endl;
+        }else{
+            cout<<"YES"<<endl;
+        }
     }
+    
 }
 

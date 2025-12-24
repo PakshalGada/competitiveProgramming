@@ -20,10 +20,18 @@ typedef pair<int, int> pii;
 
 int main() {
     int t;cin>>t;
+    
     while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+        int n,k;cin>>n>>k;
+        ll minSum = 1LL*k*k;  
+
+        if (n >= minSum && (n % 2 == k % 2)){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+
     }
+    
 }
 

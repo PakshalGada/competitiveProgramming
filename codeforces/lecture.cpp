@@ -19,11 +19,21 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int t;cin>>t;
-    while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+    int n, m; cin>>n>>m;
+    
+    unordered_map<string, string> mp;
+    
+    for(int i=0; i<m; i++){
+        string a, b; cin>>a>>b;
+        
+        if(a.length()<=b.length()) mp[a]=a;
+        else mp[a]=b;
     }
+    
+    for(int i=0; i<n; i++){
+        string word; cin>>word;
+        cout<<mp[word]<<" ";
+    }
+    
 }
 

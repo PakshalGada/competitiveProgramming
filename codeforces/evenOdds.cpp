@@ -19,11 +19,18 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int t;cin>>t;
-    while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+    ll n,k; 
+    cin>>n>>k;
+    
+    ll oddCount=(n+1)/2;
+    
+    if (k<=oddCount) {
+        cout<<2*k-1<<endl;
+    } else {
+        cout<<2*(k-oddCount)<<endl;
     }
+    
+    
+    
 }
 

@@ -19,11 +19,18 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int t;cin>>t;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t; cin>>t;
+    
     while(t--){
-        ll n, k;cin>>n>>k;
-        ll ans=k+(k-1)/(n-1);
-        cout<<ans<<endl;
+        int n; cin>>n;
+        
+        vector<int> a(n);
+        for(int i=0; i<n-1; i++) cin>>a[i];
+        
+        
     }
+    
 }
-
