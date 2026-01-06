@@ -22,11 +22,25 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n, a, b; cin>>n>>a>>b;
+    int t; cin>>t;
     
-    int minPos=max(a+1, n-b);
-    int ans=n-minPos+1;
-    
-    cout<<ans<<endl;
-    
+    while(t--){
+        int n, k; cin>>n>>k;
+        string s; cin>>s;
+        int white=0;
+        
+        for(int i=0; i<k; i++){
+            if(s[i]=='W') white++;
+        }
+        
+        int ans=white;
+        
+        for(int i=k; i<n; i++){
+            if(s[i] == 'W') white++;
+            if(s[i-k] == 'W') white--;
+            ans = min(ans, white);
+        }
+        
+        cout<<ans<<endl;
+    }
 }

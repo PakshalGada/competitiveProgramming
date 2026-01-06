@@ -22,11 +22,22 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n, a, b; cin>>n>>a>>b;
+    int n; cin>>n;
+    string s; cin>>s;
     
-    int minPos=max(a+1, n-b);
-    int ans=n-minPos+1;
+    int count=0;
+    int ans=0;
+    
+    for(char c:s){
+        if (c == 'x') {
+            count++;
+            if (count >= 3) {
+                ans++;
+            }
+        } else {
+            count = 0;
+        }
+    }
     
     cout<<ans<<endl;
-    
 }

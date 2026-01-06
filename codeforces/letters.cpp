@@ -22,11 +22,5 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n, a, b; cin>>n>>a>>b;
-    
-    int minPos=max(a+1, n-b);
-    int ans=n-minPos+1;
-    
-    cout<<ans<<endl;
     
 }

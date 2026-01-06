@@ -22,11 +22,19 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n, a, b; cin>>n>>a>>b;
+    int t; cin>>t;
     
-    int minPos=max(a+1, n-b);
-    int ans=n-minPos+1;
-    
-    cout<<ans<<endl;
-    
+    while(t--){
+        ll a, b; cin>>a>>b;
+        
+        if(b == 1){
+            cout<<"NO"<<endl;
+        }else if(b == 2){
+            cout<<"YES"<<endl;
+            cout<<a<<" "<<3*a<<" "<<4*a<<endl;
+        }else{
+            cout<<"YES"<<endl;
+            cout<<a<<" "<<a*(b-1)<<" "<<a*b<<endl;
+        }
+    } 
 }
