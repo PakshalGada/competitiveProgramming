@@ -21,25 +21,16 @@ typedef pair<int, int> pii;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    int n, m, k; cin>>n>>m>>k;
-
-    vi x(m+1);
-    for (int i=0; i <= m; i++) {
-            cin>>x[i];
-    }
-
-    int fedor = x[m];
-    int friends = 0;
-
-    for (int i = 0; i < m; i++) {
-        int diff = x[i] ^ fedor;
-        if (__builtin_popcount(diff) <= k) {
-            friends++;
-        }
-    }
-
-    cout << friends << endl;
-
-
+    ll t;cin>>t;
+    while(t--){
+    	ll n,k;cin>>n>>k;
+    	vector <ll> a(n);
+    	for(ll i=0;i<n;i++)cin>>a[i];
+    	ll m=0;
+    	unordered_set<ll> s(a.begin(),a.end());
+    	while(s.count(m)){
+    	m++;
+    	}
+    	cout<<min(k-1,m)<<endl;
+    } 
 }

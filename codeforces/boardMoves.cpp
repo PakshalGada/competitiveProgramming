@@ -21,25 +21,19 @@ typedef pair<int, int> pii;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    int n, m, k; cin>>n>>m>>k;
-
-    vi x(m+1);
-    for (int i=0; i <= m; i++) {
-            cin>>x[i];
+    
+    int t; cin>>t;
+    
+    while(t--){
+    	ll n; cin>>n;
+    	
+    	ll k=(n-1)/2;
+    	
+    	ll sumSquare = k*(k+1)*(2*k+1)/6;
+    	
+    	ll ans = 8*sumSquare;
+    	
+    	cout<<ans<<endl;
     }
-
-    int fedor = x[m];
-    int friends = 0;
-
-    for (int i = 0; i < m; i++) {
-        int diff = x[i] ^ fedor;
-        if (__builtin_popcount(diff) <= k) {
-            friends++;
-        }
-    }
-
-    cout << friends << endl;
-
-
+    
 }
