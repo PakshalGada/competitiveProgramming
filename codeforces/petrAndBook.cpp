@@ -22,22 +22,20 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin >> n;
+    int n;
+    cin >> n;
 
-    vector<ll> prefix(n);
-    for (int i = 0; i < n; i++) {
-        ll x;
-        cin >> x;
-        prefix[i] = x + (i > 0 ? prefix[i - 1] : 0);
-    }
-
-    int m; cin >> m;
-
-    while (m--) {
-        ll q; cin >> q;
-        int pile = lower_bound(prefix.begin(), prefix.end(), q) - prefix.begin();
-        cout << pile + 1 <<endl;   
-    }
+    vi a(7);
+    for (int i = 0;  i<7; i++) cin>>a[i];
     
-}
+    int day = 0; 
+    while (true) {
+        n -= a[day];
+        if (n <= 0) {
+            cout << day + 1 <<endl;
+            break;
+        }
+        day = (day+1)%7;
+    }
 
+}

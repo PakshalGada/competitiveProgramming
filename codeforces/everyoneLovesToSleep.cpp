@@ -24,24 +24,27 @@ int main() {
     while(t--){
         int n, H, M;
         cin >> n >> H >> M;
-
-        int sleepTime = H * 60 + M;
-        int best = 24 * 60; 
+        
+        int bedtimeMinutes = H * 60 + M;
+        int minSleepMinutes = 24 * 60; 
 
         for (int i = 0; i < n; i++) {
             int h, m;
             cin >> h >> m;
-
-            int alarm = h * 60 + m;
+            
+            int alarmMinutes = h * 60 + m;
             int diff;
 
-            if (alarm >= sleepTime)
-                diff = alarm - sleepTime;
-            else
-                diff = (24 * 60 - sleepTime) + alarm;
+            if (alarmMinutes >= bedtimeMinutes) {
+                diff = alarmMinutes - bedtimeMinutes;
+            } else {
+                diff = (24 * 60 - bedtimeMinutes) + alarmMinutes;
+            }
 
-            best = min(best, diff);
+            minSleepMinutes = min(minSleepMinutes, diff);
         }
-   } 
+
+        cout << minSleepMinutes / 60 << " " << minSleepMinutes % 60 << endl;
+    } 
 }
 

@@ -22,22 +22,15 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin >> n;
-
-    vector<ll> prefix(n);
-    for (int i = 0; i < n; i++) {
-        ll x;
-        cin >> x;
-        prefix[i] = x + (i > 0 ? prefix[i - 1] : 0);
-    }
-
-    int m; cin >> m;
-
-    while (m--) {
-        ll q; cin >> q;
-        int pile = lower_bound(prefix.begin(), prefix.end(), q) - prefix.begin();
-        cout << pile + 1 <<endl;   
-    }
+    int t; cin>>t;
     
-}
+    while(t--){
+        int n, a, b; cin>>n>>a>>b;
+        string s;
+        for (int i = 0; i < n; i++) {
+            s += char('a' + (i % b));
+        }
 
+        cout<<s<<endl;
+    }    
+}

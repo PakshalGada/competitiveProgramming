@@ -22,22 +22,29 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin >> n;
-
-    vector<ll> prefix(n);
-    for (int i = 0; i < n; i++) {
-        ll x;
-        cin >> x;
-        prefix[i] = x + (i > 0 ? prefix[i - 1] : 0);
-    }
-
-    int m; cin >> m;
-
-    while (m--) {
-        ll q; cin >> q;
-        int pile = lower_bound(prefix.begin(), prefix.end(), q) - prefix.begin();
-        cout << pile + 1 <<endl;   
-    }
+    ll n, m; cin>>n>>m;
     
-}
+    if (m % n != 0) {
+        cout<< -1 <<endl;
+        return 0;
+    }
 
+    ll x = m/n;
+    int moves = 0;
+
+    while (x%2 == 0) {
+        x /= 2;
+        moves++;
+    }
+
+    while (x%3 == 0) {
+        x /= 3;
+        moves++;
+    }
+
+    if (x != 1) {
+        cout<< -1 <<endl;
+    } else {
+        cout<<moves<<endl;
+    }
+}

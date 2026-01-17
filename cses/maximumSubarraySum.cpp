@@ -22,22 +22,21 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin >> n;
-
-    vector<ll> prefix(n);
-    for (int i = 0; i < n; i++) {
-        ll x;
-        cin >> x;
-        prefix[i] = x + (i > 0 ? prefix[i - 1] : 0);
-    }
-
-    int m; cin >> m;
-
-    while (m--) {
-        ll q; cin >> q;
-        int pile = lower_bound(prefix.begin(), prefix.end(), q) - prefix.begin();
-        cout << pile + 1 <<endl;   
+    ll n; cin>>n;
+    
+    vll a(n+1);
+    for(int i=1; i<=n; i++){
+        ll x; cin>>x;
+        a[i]=a[i-1] + x;
     }
     
+    ll maxSum = a[1];
+    ll minSum = a[0];
+    
+    for(int i=1; i<=n; i++){
+        maxSum = max(maxSum, a[i]-minSum);
+        minSum = min(minSum, a[i]);
+    }
+    
+    cout<<maxSum<<endl; 
 }
-
