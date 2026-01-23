@@ -25,20 +25,22 @@ int main() {
     int t; cin>>t;
     
     while(t--){
-        int n; cin>>n;
-        
-        vi a(n);
-        
-        for(int i=0; i<n; i++){
-            cin>>a[i];
-        }
-        
-        sort(a.begin(), a.end(), greater<int>());
+        int n;
+        cin>>n;
 
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
+        vi a(n), b(n);
+        for (int i = 0; i < n; i++) cin >> a[i];
+        for (int i = 0; i < n; i++) cin >> b[i];
 
+        ll ans = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            ans += max(0, a[i] - b[i + 1]);
+        }
+
+        ans += a[n - 1];
+
+        cout<<ans<<endl;
     }
+    
 }

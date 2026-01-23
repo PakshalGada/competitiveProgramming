@@ -26,19 +26,25 @@ int main() {
     
     while(t--){
         int n; cin>>n;
-        
         vi a(n);
+        for(int i=0; i<n; i++) cin>>a[i];
         
-        for(int i=0; i<n; i++){
-            cin>>a[i];
-        }
-        
-        sort(a.begin(), a.end(), greater<int>());
+        vector<bool> occupied(n+2, false); 
+        bool ok = true;
 
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
+        occupied[a[0]] = true;
 
+        for (int i = 1; i < n; i++) {
+            int seat = a[i];
+
+            if (!occupied[seat-1] && !occupied[seat+1]) {
+                ok = false;
+                break;
+            }
+
+            occupied[seat] = true;
+        }
+
+        cout<<(ok?"YES":"NO")<<endl;
     }
 }

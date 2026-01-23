@@ -25,20 +25,27 @@ int main() {
     int t; cin>>t;
     
     while(t--){
-        int n; cin>>n;
+        string a; cin>>a;
         
-        vi a(n);
-        
-        for(int i=0; i<n; i++){
-            cin>>a[i];
+        if (a.size() < 3 || a[0] != '1' || a[1] != '0') {
+            cout<<"NO"<<endl;
+            continue;
         }
-        
-        sort(a.begin(), a.end(), greater<int>());
 
-        for (int x : a) {
-            cout << x << " ";
+        string x_part = a.substr(2);
+
+        if (x_part[0] == '0') {
+            cout<<"NO"<<endl;
+            continue;
         }
-        cout << "\n";
 
+        int x = stoi(x_part);
+
+        if (x>=2) {
+            cout<<"YES"<<endl;
+        } else {
+            cout<<"NO"<<endl;
+        }
+    
     }
 }

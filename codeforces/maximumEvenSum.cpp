@@ -25,20 +25,22 @@ int main() {
     int t; cin>>t;
     
     while(t--){
-        int n; cin>>n;
+        ll a, b; cin>>a>>b;
         
-        vi a(n);
-        
-        for(int i=0; i<n; i++){
-            cin>>a[i];
+        if ((b & 1) && !(a & 1)) {
+            cout << -1 << endl;
+            continue;
         }
         
-        sort(a.begin(), a.end(), greater<int>());
-
-        for (int x : a) {
-            cout << x << " ";
+        ll best = a * b + 1;
+        if (best % 2 == 0) {
+            cout << best << "\n";
+            continue;
         }
-        cout << "\n";
 
+        ll p = b & -b;   
+        ll k = b / p;
+
+        cout << a * k + p << "\n";
     }
 }

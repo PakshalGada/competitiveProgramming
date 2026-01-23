@@ -26,19 +26,16 @@ int main() {
     
     while(t--){
         int n; cin>>n;
-        
-        vi a(n);
+        vi p(n), q(n);
         
         for(int i=0; i<n; i++){
-            cin>>a[i];
+            cin>>p[i];
+            q[i]=(n+1)-p[i];
         }
         
-        sort(a.begin(), a.end(), greater<int>());
-
-        for (int x : a) {
-            cout << x << " ";
+        for (int i=0; i<n; i++) {
+            cout<<q[i]<<" ";
         }
-        cout << "\n";
-
+        cout<<"\n";
     }
 }

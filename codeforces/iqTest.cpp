@@ -22,23 +22,27 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t; cin>>t;
+    int n; cin>>n;
     
-    while(t--){
-        int n; cin>>n;
-        
-        vi a(n);
-        
-        for(int i=0; i<n; i++){
-            cin>>a[i];
-        }
-        
-        sort(a.begin(), a.end(), greater<int>());
+    vi a(n);
+    int evenCount = 0, oddCount = 0;
 
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
-
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        if (a[i] % 2 == 0)
+            evenCount++;
+        else
+            oddCount++;
     }
+
+    bool findEven = (evenCount < oddCount);
+
+    for (int i = 0; i < n; i++) {
+        if ((a[i] % 2 == 0) == findEven) {
+            cout << i + 1 << endl;
+            break;
+        }
+    }
+
+
 }

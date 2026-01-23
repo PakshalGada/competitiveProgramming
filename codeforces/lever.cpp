@@ -27,18 +27,17 @@ int main() {
     while(t--){
         int n; cin>>n;
         
-        vi a(n);
+        vi a(n), b(n);
+        for(int i=0; i<n; i++) cin>>a[i];
+        for(int i=0; i<n; i++) cin>>b[i];
         
-        for(int i=0; i<n; i++){
-            cin>>a[i];
+        int excess = 0;
+        for (int i=0; i<n; i++) {
+            if (a[i]>b[i])
+                excess += (a[i]-b[i]);
         }
-        
-        sort(a.begin(), a.end(), greater<int>());
 
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
+        cout<<excess+1<<endl;
 
     }
 }

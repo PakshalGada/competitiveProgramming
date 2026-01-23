@@ -25,20 +25,17 @@ int main() {
     int t; cin>>t;
     
     while(t--){
-        int n; cin>>n;
+        int n, h, l; cin>>n>>h>>l;
+        int sumH=0, sumL=0;
         
         vi a(n);
-        
         for(int i=0; i<n; i++){
             cin>>a[i];
+            if(a[i]<=h) sumH=0;
+            if(a[i]<=l) sumL=0;
         }
         
-        sort(a.begin(), a.end(), greater<int>());
-
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
-
+        cout<<min(sumH,sumL)<<endl;
     }
+    
 }

@@ -25,20 +25,19 @@ int main() {
     int t; cin>>t;
     
     while(t--){
-        int n; cin>>n;
+        int n, k; cin>>n>>k;
         
-        vi a(n);
-        
-        for(int i=0; i<n; i++){
-            cin>>a[i];
+        vector<string> a(n);
+        for (int i=0; i<n; i++) {
+            cin>>grid[i];
         }
-        
-        sort(a.begin(), a.end(), greater<int>());
 
-        for (int x : a) {
-            cout << x << " ";
+        for (int i=0; i<n; i+=k) {
+            for (int j=0; j<n; j+=k) {
+                cout<<grid[i][j];
+            }
+            cout<<"\n";
         }
-        cout << "\n";
-
     }
+    
 }

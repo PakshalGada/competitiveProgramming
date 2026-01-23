@@ -25,20 +25,11 @@ int main() {
     int t; cin>>t;
     
     while(t--){
-        int n; cin>>n;
+        int k, x; cin>>k>>x;
         
-        vi a(n);
+        ll initial = x;
+        initial <<= k;
         
-        for(int i=0; i<n; i++){
-            cin>>a[i];
-        }
-        
-        sort(a.begin(), a.end(), greater<int>());
-
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
-
+        cout<<initial<<endl;
     }
 }

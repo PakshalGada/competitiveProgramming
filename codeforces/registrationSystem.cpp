@@ -22,23 +22,21 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t; cin>>t;
-    
-    while(t--){
-        int n; cin>>n;
-        
-        vi a(n);
-        
-        for(int i=0; i<n; i++){
-            cin>>a[i];
-        }
-        
-        sort(a.begin(), a.end(), greater<int>());
+    int n; cin>>n;
 
-        for (int x : a) {
-            cout << x << " ";
-        }
-        cout << "\n";
+    unordered_map<string, int> mp;
 
+    while (n--) {
+        string name;
+        cin>>name;
+
+        if (mp[name] == 0) {
+            cout << "OK\n";
+            mp[name] = 1;
+        } else {
+            cout<<name<<mp[name]<<endl;
+            mp[name]++;
+        }
     }
+
 }
