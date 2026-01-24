@@ -19,16 +19,8 @@ typedef pair<int, int> pii;
 #endif
 
 int main() {
-    int t;cin>>t;
-    while(t--){
-        int n; cin>>n;
-        if (n%4 == 0)
-            cout<<"Bob"<<endl;
-        else
-            cout<<"Alice"<<endl;
-
-        
-    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     
 }
-
