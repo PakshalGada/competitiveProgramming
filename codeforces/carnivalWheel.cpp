@@ -23,7 +23,10 @@ int main() {
     
     while(t--)[
         ll l, a, b;  cin>>l>>a>>b;
-        
+        int g = gcd(l, b);
+
+        int maxPrize = a+((l-1-a)/g)*g;
+        cout<<maxPrize<<endl;
         
     ]
     

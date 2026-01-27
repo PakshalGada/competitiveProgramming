@@ -30,8 +30,7 @@ int main() {
             cout << -1;
             return 0;
         }
-        cout << x1 + d << " " << y1 << " "
-             << x2 + d << " " << y2;
+        cout << x1 + d << " " << y1 << " " << x2 + d << " " << y2;
     }
 
     else if (y1 == y2) {
