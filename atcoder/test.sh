@@ -1,5 +1,6 @@
 #!/bin/bash
 PROBLEM="$1"
+if [ -z "$PROBLEM" ]; then echo "Usage: ./test.sh <problemName>"; exit 1; fi
 CPP_FILE="${PROBLEM}.cpp"
 EXEC_FILE="${PROBLEM}"
 TEST_DIR="tests/${PROBLEM}"
@@ -8,8 +9,8 @@ passed=0; failed=0
 for input_file in "$TEST_DIR"/input*.txt; do
     test_num=$(basename "$input_file" | sed 's/input\([0-9]*\).txt/\1/')
     output_file="$TEST_DIR/output${test_num}.txt"
-    ./"$EXEC_FILE" < "$input_file" > temp_out.txt
-    if diff -wq temp_out.txt "$output_file" > /dev/null; then
+    ./"$EXEC_FILE" < "$input_file" > temp_output.txt
+    if diff -wq temp_output.txt "$output_file" > /dev/null; then
         echo "Test ${test_num}: PASSED"
         ((passed++))
     else
@@ -17,5 +18,5 @@ for input_file in "$TEST_DIR"/input*.txt; do
         ((failed++))
     fi
 done
-rm -f temp_out.txt "$EXEC_FILE"
+rm -f temp_output.txt "$EXEC_FILE"
 echo "Results: ${passed} passed, ${failed} failed"
