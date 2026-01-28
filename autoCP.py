@@ -6,17 +6,17 @@ from bs4 import BeautifulSoup
 import subprocess
 
 def to_camel_case(s):
-    # Remove non-alphanumeric except spaces
+
     s = re.sub(r'[^a-zA-Z0-9\s]', '', s)
     parts = s.split()
     if len(parts) == 0:
         return 'problem'
-    # Skip contest letter if present (e.g., "A.")
+
     if len(parts[0]) <= 2 and (parts[0].isupper() or parts[0].endswith('.')):
         parts = parts[1:]
     if not parts:
         return 'problem'
-    # Create camelCase
+
     return parts[0].lower() + ''.join(word.capitalize() for word in parts[1:])
 
 def extract_test_cases(soup, platform):
@@ -24,10 +24,10 @@ def extract_test_cases(soup, platform):
     test_cases = []
     
     if platform == 'cses':
-        # CSES test cases are in <pre> tags within sections
+
         examples_section = soup.find('h1', text=lambda t: t and 'Example' in t)
         if examples_section:
-            # Find all pre tags after the examples section
+
             current = examples_section.next_sibling
             inputs = []
             outputs = []
@@ -38,7 +38,7 @@ def extract_test_cases(soup, platform):
                         break
                     if current.name == 'pre':
                         text = current.text.strip()
-                        # Alternate between input and output
+
                         if len(inputs) == len(outputs):
                             inputs.append(text)
                         else:
@@ -49,14 +49,13 @@ def extract_test_cases(soup, platform):
                 test_cases.append({'input': inp, 'output': out})
     
     elif platform == 'codeforces':
-        # Codeforces has sample tests in divs with class 'sample-test'
         sample_test = soup.find('div', class_='sample-test')
         if sample_test:
             inputs = sample_test.find_all('div', class_='input')
             outputs = sample_test.find_all('div', class_='output')
             
             for inp_div, out_div in zip(inputs, outputs):
-                # Find the <pre> tag inside
+
                 inp_pre = inp_div.find('pre')
                 out_pre = out_div.find('pre')
                 
@@ -66,6 +65,29 @@ def extract_test_cases(soup, platform):
                         'output': out_pre.text.strip()
                     })
     
+    elif platform == 'atcoder':
+        h3_tags = soup.find_all('h3')
+        
+        sample_inputs = []
+        sample_outputs = []
+        
+        for h3 in h3_tags:
+            h3_text = h3.get_text()
+            if 'Sample Input' in h3_text:
+                pre_tag = h3.find_next('pre')
+                if pre_tag:
+                    sample_inputs.append(pre_tag.text.strip())
+            elif 'Sample Output' in h3_text:
+                pre_tag = h3.find_next('pre')
+                if pre_tag:
+                    sample_outputs.append(pre_tag.text.strip())
+        
+        for inp, out in zip(sample_inputs, sample_outputs):
+            test_cases.append({
+                'input': inp,
+                'output': out
+            })
+    
     return test_cases
 
 def create_test_files(folder, camel_name, test_cases):
@@ -74,12 +96,11 @@ def create_test_files(folder, camel_name, test_cases):
     tests_folder.mkdir(parents=True, exist_ok=True)
     
     for i, test in enumerate(test_cases, 1):
-        # Create input file
+
         input_file = tests_folder / f'input{i}.txt'
         with open(input_file, 'w') as f:
             f.write(test['input'])
         
-        # Create expected output file
         output_file = tests_folder / f'output{i}.txt'
         with open(output_file, 'w') as f:
             f.write(test['output'])
@@ -198,15 +219,25 @@ def parse_problem(html_path):
     with open(html_path, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
     
-    # Detect platform based on folder name
+    # Detect platform based on folder name or content
     folder_name = html_path.parent.name.lower()
-    if 'cses' in folder_name:
+    filename = html_path.name.lower()
+    
+    if 'cses' in folder_name or 'cses' in filename:
         platform = 'cses'
-    elif 'codeforces' in folder_name:
+    elif 'codeforces' in folder_name or 'codeforces' in filename:
         platform = 'codeforces'
+    elif 'atcoder' in folder_name or 'atcoder' in filename:
+        platform = 'atcoder'
     else:
-        print(f"Unknown platform for {html_path}")
-        return None
+        # Try to detect based on HTML content
+        if soup.find('meta', property='og:site_name', content='AtCoder'):
+            platform = 'atcoder'
+        elif soup.find('div', class_='problem-statement'):
+            platform = 'codeforces'
+        else:
+            print(f"Unknown platform for {html_path}")
+            return None
     
     title = ''
     input_desc = ''
@@ -259,6 +290,55 @@ def parse_problem(html_path):
         if output_section:
             for elem in output_section.find_all(['p', 'pre']):
                 output_desc += elem.text.strip() + '\n'
+    
+    elif platform == 'atcoder':
+        # Title from <title> tag or og:title meta tag
+        title_tag = soup.find('title')
+        if title_tag:
+            title = title_tag.text.strip()
+        else:
+            # Try meta tag
+            meta_title = soup.find('meta', property='og:title')
+            if meta_title:
+                title = meta_title.get('content', '')
+        
+        # Input section
+        input_h3 = soup.find('h3', text=lambda t: t and t.strip() == 'Input')
+        if input_h3:
+            # Get the next <p> tag
+            next_p = input_h3.find_next('p')
+            if next_p:
+                input_desc = next_p.text.strip()
+            
+            # Also get any <pre> tags in the section
+            current = input_h3.next_sibling
+            while current:
+                if hasattr(current, 'name'):
+                    if current.name == 'h3':
+                        break
+                    if current.name == 'pre':
+                        input_desc += '\n' + current.text.strip()
+                    elif current.name == 'p':
+                        input_desc += '\n' + current.text.strip()
+                current = current.next_sibling
+        
+        # Output section
+        output_h3 = soup.find('h3', text=lambda t: t and t.strip() == 'Output')
+        if output_h3:
+            # Get the next <p> tag
+            next_p = output_h3.find_next('p')
+            if next_p:
+                output_desc = next_p.text.strip()
+            
+            # Also get any following content
+            current = output_h3.next_sibling
+            while current:
+                if hasattr(current, 'name'):
+                    if current.name == 'h3':
+                        break
+                    if current.name == 'p':
+                        output_desc += '\n' + current.text.strip()
+                current = current.next_sibling
     
     # Extract test cases
     test_cases = extract_test_cases(soup, platform)
@@ -321,7 +401,7 @@ def cleanup_downloads_folders(downloads_folder):
         if item.is_dir():
             folder_name = item.name.lower()
             # Check if it's a competitive programming problem folder
-            if any(keyword in folder_name for keyword in ['cses', 'codeforces', 'problem']):
+            if any(keyword in folder_name for keyword in ['cses', 'codeforces', 'atcoder', 'problem']):
                 try:
                     shutil.rmtree(item)
                     print(f"Deleted folder: {item}")
@@ -335,10 +415,12 @@ comp_prog_folder = Path.home() / "competitiveProgramming"
 # Subfolders
 cses_folder = comp_prog_folder / "cses"
 codeforces_folder = comp_prog_folder / "codeforces"
+atcoder_folder = comp_prog_folder / "atcoder"
 
 # Create folders if they don't exist
 os.makedirs(cses_folder, exist_ok=True)
 os.makedirs(codeforces_folder, exist_ok=True)
+os.makedirs(atcoder_folder, exist_ok=True)
 
 # Supported HTML extensions
 html_extensions = ('.html', '.htm')
@@ -365,6 +447,9 @@ for file_path in downloads_folder.iterdir():
         elif 'codeforces' in filename:
             destination = codeforces_folder / file_path.name
             target_folder = codeforces_folder
+        elif 'atcoder' in filename or '_-_' in filename:  # AtCoder files often have format like "A_-_Problem.html"
+            destination = atcoder_folder / file_path.name
+            target_folder = atcoder_folder
         
         if destination:
             print(f"Moving {file_path.name} -> {destination}")
