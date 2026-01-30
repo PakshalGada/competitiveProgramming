@@ -22,27 +22,26 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin>>n;
-    int volume=0;
-    bool flag=false;
-    for(int i=0; i<n; i++){
-        int A; cin >> A;
+    ll N, M; cin>>N>>M;
 
-        if (A == 1) {
-            volume++;
-        } 
-        else if (A == 2) {
-            if (volume > 0) volume--;
-        } 
-        else { 
-            flag = !flag;
-        }
+    vector<ll> deg(N + 1, 0);
 
-        if (flag && volume >= 3)
-            cout << "Yes\n";
-        else
-            cout << "No\n";
-
+    for (int i = 0; i < M; i++) {
+        int A, B; cin >> A >> B;
+        deg[A]++;
+        deg[B]++;
     }
+
+    auto C3 = [](ll x) -> ll {
+        if (x < 3) return 0LL;
+        return x * (x - 1) * (x - 2) / 6;
+    };
+
+    for (int i = 1; i <= N; i++) {
+        ll allowed = (N - 1) - deg[i];
+        cout << C3(allowed) << " ";
+    }
+
+    cout << '\n';
     
 }
