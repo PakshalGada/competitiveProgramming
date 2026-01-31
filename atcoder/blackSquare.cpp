@@ -22,24 +22,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t; cin>>t;
+    int p, q, x, y; cin>>p>>q>>x>>y;
     
-    while(t--){
-        int n; cin>>n;
-        
-        vi a(n);
-        bool flag=true;
-        for(int i=0; i<n; i++) cin>>a[i];
-        
-        for(int i=1; i<n; i++){
-            int semitone = abs(a[i]-a[i-1]);
-            if(semitone != 5 && semitone != 7){
-                flag=false;
-                break;
-            }
-        }
-        
-        cout<<(flag? "YES\n" : "NO\n");
-    }
+    if(p<=x && x<p+100 && q<=y && y<q+100) cout<<"Yes\n";
+    else cout<<"No\n";
     
 }

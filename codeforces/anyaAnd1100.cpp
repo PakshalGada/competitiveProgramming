@@ -18,6 +18,13 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
+bool is1100(const string &s, int i) {
+    if (i < 0 || i + 3 >= (int)s.size()) return false;
+    return s[i] == '1' && s[i + 1] == '1' &&
+           s[i + 2] == '0' && s[i + 3] == '0';
+}
+
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -49,6 +56,6 @@ int main() {
                 if (is1100(s, i)) cnt++;
 
             cout << (cnt > 0 ? "YES\n" : "NO\n");
-
+        }
     }
 }
