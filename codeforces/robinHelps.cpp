@@ -22,17 +22,28 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin>>n;
+    int t; cin>>t;
     
-    vector<pii> h(n);
-    
-    for(int i=0; i<n; i++){
-        cin>>h[i].first;
-        h[i].second=i+1;
+    while(t--){
+        int n, k;
+        cin >> n >> k;
+
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) cin >> a[i];
+
+        int gold = 0, ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (a[i] >= k) {
+                gold += a[i];
+            } else if (a[i] == 0 && gold > 0) {
+                gold--;
+                ans++;
+            }
+        }
+
+        cout << ans << '\n';
+
     }
-    
-    sort(h.begin(), h.end());
-    
-    cout<<h[0].second<<" "<<h[1].second<<" "<<h[2].second<<endl;
     
 }

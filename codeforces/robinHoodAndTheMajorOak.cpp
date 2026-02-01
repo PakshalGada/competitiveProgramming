@@ -22,17 +22,19 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin>>n;
+    int t; cin >> t;
     
-    vector<pii> h(n);
-    
-    for(int i=0; i<n; i++){
-        cin>>h[i].first;
-        h[i].second=i+1;
+    while (t--) {
+        ll n, k; cin >> n >> k;
+
+        ll L = n - k + 1;
+        ll R = n;
+
+        ll oddCount = (R + 1) / 2 - L / 2;
+
+        if (oddCount % 2 == 0)
+            cout << "YES\n";  
+        else
+            cout << "NO\n";   
     }
-    
-    sort(h.begin(), h.end());
-    
-    cout<<h[0].second<<" "<<h[1].second<<" "<<h[2].second<<endl;
-    
 }

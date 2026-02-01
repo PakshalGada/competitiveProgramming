@@ -22,17 +22,5 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int n; cin>>n;
-    
-    vector<pii> h(n);
-    
-    for(int i=0; i<n; i++){
-        cin>>h[i].first;
-        h[i].second=i+1;
-    }
-    
-    sort(h.begin(), h.end());
-    
-    cout<<h[0].second<<" "<<h[1].second<<" "<<h[2].second<<endl;
     
 }
