@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef ll ll;
+typedef long long ll;
 typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef pair<int, int> pii;
@@ -22,27 +22,41 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t; cin>>t;
-    
+    ll t;cin>>t;
     while(t--){
-        ll s, k, m; cin>>s>>k>>m;
-        
-        ll top = s;
-        ll n = m / k; 
-
-        if (n > 0) {
-            if (k >= s) {
-                if (n % 2 == 1) top = 0;
-                else top = s;
-            } else {
-                if (n % 2 == 1) top = s - k;
-                else top = s;
+        ll s,k,m;cin>>s>>k>>m;
+        ll flips=m/k;
+        ll time=m%k;
+        ll ans=0;
+        if(flips%2==0){
+            if(time>s){
+                ans=0;
+            }
+            else ans=s-time;
+        }
+        else {
+            if(k>s){
+                if(s>=time){
+                    ans=s-time;
+                }
+                else {
+                    ans=0;
+                }
+            }
+            else {
+                if(k>time){
+                    ans=k-time;
+                }
+                else ans=0;
             }
         }
+        if(flips==0){
+            if(s>m){
+                ans=s-m;
+            }
+            else ans=0;
+        }
+        cout<<ans<<endl;
+    }
 
-        ll rem = m % k;
-        ll fallen = min(top, rem);
-        
-        cout << top - fallen << endl;
-    }  
 }
