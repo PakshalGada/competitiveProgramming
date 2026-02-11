@@ -18,11 +18,33 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
+int digitSum(ll y) {
+    int sum = 0;
+    while (y > 0) {
+        sum += y % 10;
+        y /= 10;
+    }
+    return sum;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int d, f; cin>>d>>f;
+    int t; cin>>t;
     
-    cout<<abs(d-f)%7<<endl;
+    while(t--){
+        ll x; cin>>x;
+        
+        int count = 0;
+        
+        for(ll y = x+1; y <= x + 100; y++){
+            if (y - digitSum(y) == x) {
+                count++;
+            }
+        }
+        
+        cout<<count<<endl;
+    }
+    
 }
