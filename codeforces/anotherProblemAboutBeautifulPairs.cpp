@@ -22,18 +22,5 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t; cin>>t;
     
-    while(t--){
-        ll p, q; cin>>p>>q;
-       
-        
-        if (3 * p >= 2 * q && p < q) {
-            cout<<"Bob"<<endl;
-        } else {
-            cout<<"Alice"<< endl;
-        }
-        
-        
-    }
 }
