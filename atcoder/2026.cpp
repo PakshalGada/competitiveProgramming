@@ -25,7 +25,7 @@ int main() {
     int N;
     cin >> N;
 
-    vector<int> cnt(N + 1, 0);
+    vi   cnt(N + 1, 0);
 
     for (int x = 1; x * x <= N; x++) {
         for (int y = x + 1; x * x + y * y <= N; y++) {
