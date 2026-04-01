@@ -259,8 +259,3 @@ for file_path in downloads_folder.iterdir():
 
 for folder in used_folders:
     create_test_script(folder)
-
-# Open in Zed editor and terminal
-for cpp in created_cpps:
-    subprocess.Popen(["zed", str(cpp)])
-    subprocess.Popen(["gnome-terminal", "--working-directory=" + str(cpp.parent)])
