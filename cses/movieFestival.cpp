@@ -22,32 +22,29 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t; cin>>t;
+    int n; cin>>n;
 
-    while(t--){
-    	ll n, c, k; cin>>n>>c>>k;
+    vector<pii> a(n);
 
-    	vll a(n+1);
-
-    	for(int i=1; i<=n; i++) cin>>a[i];
-
-    	sort(a.begin(), a.end());
-
-    	for(int i=1; i<=n; i++){
-    		if(a[i]>c) break;
-
-    		int d = min(k, c-a[i]);
-    		k-=d;
-    		c += a[i]+d;
-
-    	}
-
-    	cout<<c<<endl;
-
-
-
-
+    for(int i=0; i<n; i++){
+    	cin>>a[i].first>>a[i].second;
     }
+
+    sort(a.begin(), a.end(), [](auto &a, auto &b){
+    	return a.second < b.second;
+    });
+
+    int count = 0;
+    int last = 0;
+
+    for(auto &x : a){
+    	if(x.first>=last){
+    		count++;
+    		last = x.second;
+    	}
+    }
+
+    cout<<count<<endl;
 
 
 }
