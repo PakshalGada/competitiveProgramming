@@ -18,14 +18,12 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+int dx[4] = {-1, 1, -1, 1}, dy[4] = {-1, -1, 1, 1};
 
-    int t; cin>>t;
-
+int main(){
+    int t; cin >> t;
     while(t--){
-        int a, b; cin>>a>>b;
+        int a, b; cin >> a >> b;
         int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;
         set<pair<int, int>> st1, st2;
         for(int j = 0; j < 4; j++){
