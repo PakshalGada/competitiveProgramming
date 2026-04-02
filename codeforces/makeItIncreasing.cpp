@@ -30,11 +30,13 @@ int main() {
         vi a(n);
         int ans = 0;
         bool flag = true;
+
+        for(int i=0; i<n; i++) cin>>a[i];
+
         if (n == 1) {
             cout << 0 << '\n';
             continue;
         }
-        for(int i=0; i<n; i++) cin>>a[i];
 
         for (int i = n-2; i>=0; i--){
             while(a[i]>=a[i+1] && a[i]>0){
