@@ -9,6 +9,7 @@ typedef pair<int, int> pii;
 #define all(x) (x).begin(), (x).end()
 #define pb push_back
 #define mp make_pair
+
 #define fi first
 #define se second
 
@@ -25,14 +26,13 @@ int main() {
     ll n; cin>>n;
 
     vll a(n);
+    for(ll i=0; i<n; i++) cin>>a[i];
 
-    for(int i=0; i<n; i++) cin>>a[i];
+    sort(all(a));
 
-    sort(a.begin(), a.end());
+    ll sum=1;
 
-    ll sum = 1;
-
-    for(int i=0; i<n; i++){
+    for(ll i=0; i<n; i++){
         if(a[i]>sum){
             cout<<sum<<endl;
             return 0;
@@ -42,4 +42,5 @@ int main() {
     }
 
     cout<<sum<<endl;
+
 }
