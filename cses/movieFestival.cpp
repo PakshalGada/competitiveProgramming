@@ -2,11 +2,15 @@
 using namespace std;
 
 typedef long long ll;
+typedef long double ld;
 typedef vector<int> vi;
 typedef vector<ll> vll;
-typedef pair<int, int> pii;
+typedef pair<int,int> pii;
+typedef pair<long long,long long> pll;
 
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+#define forn(i, n) for (int i = 0; i < int(n); i++)
 #define pb push_back
 #define mp make_pair
 #define fi first
@@ -18,33 +22,83 @@ typedef pair<int, int> pii;
 #define debug(x)
 #endif
 
+const int INF = 1e9;
+const ll LINF = 4e18;
+const int MOD = 1e9 + 7;
+const int MAXN = 1e6 + 5;
+
+vector<bool> is_prime(MAXN, true);
+
+vector<int> primes;
+
+void sieve() {
+    is_prime[0] = is_prime[1] = false;
+    for (int i = 2; i * i < MAXN; i++) {
+        if (is_prime[i]) {
+            for (int j = i * i; j < MAXN; j += i)
+                is_prime[j] = false;
+        }
+    }
+    for (int i = 2; i < MAXN; i++)
+        if (is_prime[i]) primes.push_back(i);
+}
+
+
+ll lcm(ll a, ll b) {
+    return a / __gcd(a, b) * b;
+}
+
+ll factorial(int n) {
+    ll f = 1;
+    for (int i = 2; i <= n; i++) f *= i;
+    return f;
+}
+
+
+ll exp(ll x, ll n, ll m){
+
+    x%=m;
+    ll res=1;
+
+    while(n>0){
+        if(n%2==1) {
+            res=res*x%m;
+        }
+        x=x*x%m;
+        n/=2;
+    }
+    return res;
+}
+
+
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
 
-    int n; cin>>n;
 
-    vector<pii> a(n);
+    ll n; cin>>n;
+    vector<pii> m(n);
 
-    for(int i=0; i<n; i++){
-    	cin>>a[i].first>>a[i].second;
+    for(ll i=0; i<n; i++){
+        cin>>m[i].first>>m[i].second;
     }
 
-    sort(a.begin(), a.end(), [](auto &a, auto &b){
-    	return a.second < b.second;
+    sort(all(m), [](auto &a, auto &b) {
+        return a.second < b.second;
     });
 
-    int count = 0;
-    int last = 0;
+    ll count=0;
+    ll total=0;
 
-    for(auto &x : a){
-    	if(x.first>=last){
-    		count++;
-    		last = x.second;
-    	}
+    for(auto &i:m){
+        if(i.fir>=total){
+            count++;
+            total=i.second;
+        }
     }
 
-    cout<<count<<endl;
+    cout<<count<<"\n";
+
 
 
 }
